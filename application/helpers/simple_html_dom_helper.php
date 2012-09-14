@@ -1,9 +1,4 @@
 <?php
-
-
-// try this to get rid of out of memory errors
-ini_set('memory_limit', '64M');
-
 /**
  * Website: http://sourceforge.net/projects/simplehtmldom/
  * Acknowledge: Jose Solorzano (https://sourceforge.net/projects/php-html/)

@@ -14,7 +14,12 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:8888/';
+//REMOTE:
+//$config['base_url']	= 'http://www.jeremynathankay.com/imdb/';
+//LOCAL:
+//$config['base_url']	= 'http://localhost/';
+
+$config['base_url']	= 'http://www.jeremynathankay.com/imdb/';
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +31,7 @@ $config['base_url']	= 'http://localhost:8888/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

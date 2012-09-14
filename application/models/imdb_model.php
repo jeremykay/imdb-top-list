@@ -5,6 +5,7 @@ class Imdb_model extends CI_Model {
 	{
 		$this->load->database();
 		$this->load->helper('simple_html_dom');
+		$this->load->helper('file');
 	}
 
 	//gets all dates in the db
@@ -66,7 +67,6 @@ class Imdb_model extends CI_Model {
 	public function update_imdb()
 	{
 		
-
 		//set date
 		$dateAdded =  date('Y-m-d H:i:s');
 		
@@ -84,6 +84,10 @@ class Imdb_model extends CI_Model {
 
 			    //title
 			    $item['title'] = $tr->find('td.title', 0)->find('a',0)->innertext;
+				
+				//link
+				$link = $tr->find('td.title', 0)->find('a',0)->href;
+				$item['link'] = 'http://www.imdb.com' . $link;
 
 			    //year
 			    $year = $tr->find('td.title', 0)->find('span.year_type',0)->innertext;
@@ -121,17 +125,31 @@ class Imdb_model extends CI_Model {
 		//for the top 10 movies
 		for ($i = 0; $i <= 9; $i++) {
 
+			//upload image from full path
+			$myImg = file_get_contents($movies[$i]['image']);
+			
+			//shorten url to just filename. store this info in db
+			$movies[$i]['image'] = end(explode("/", $movies[$i]['image']));
+			
+			if ( ! write_file('./img_uploads/' . $movies[$i]['image'], $myImg))
+			{
+				 echo 'Unable to write the file';
+			}
+			else
+			{
+				 echo 'File written!';
+			}
+			
 			print_r($movies[$i]);
 			echo "<br>";
 			echo "<br>";
 			echo "<br>";
-
+			
+			//update db
 			$this->db->insert('imdb', $movies[$i]);
 
 		}
 
 	}
-
-	
 
 }
